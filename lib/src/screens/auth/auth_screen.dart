@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:od_register/src/colors/colors.dart';
+import 'package:od_register/src/screens/bloc/auth_bloc.dart';
 
 class AuthScreen extends StatelessWidget {
   @override
@@ -51,6 +52,7 @@ class AuthScreen extends StatelessWidget {
   Widget _usernameTextField() {
     return TextField(
         style: TextStyle(fontFamily: 'Raleway', color: WHITE_COLOR),
+        onChanged: authBloc.onChangeEmail,
         decoration: InputDecoration(
           counterText: "Students enter register number. Teachers enter email.",
           counterStyle: TextStyle(color: GREY_COLOR),
@@ -71,37 +73,45 @@ class AuthScreen extends StatelessWidget {
 
   Widget _userpasswordField() {
     return TextField(
-        obscureText: true,
-        style: TextStyle(fontFamily: 'Raleway', color: WHITE_COLOR),
-        decoration: InputDecoration(
-          counterText: "Please enter your password. Default is 0000",
-          counterStyle: TextStyle(color: GREY_COLOR),
-          labelText: "password",
-          labelStyle: TextStyle(
-              fontFamily: 'Raleway', fontSize: 16, color: WHITE_COLOR),
-          focusedBorder: _border(),
-          hasFloatingPlaceholder: true,
-          enabledBorder: _border(),
-        ));
+      obscureText: true,
+      style: TextStyle(fontFamily: 'Raleway', color: WHITE_COLOR),
+      onChanged: authBloc.onChangePassword,
+      decoration: InputDecoration(
+        counterText: "Please enter your password. Default is 0000",
+        counterStyle: TextStyle(color: GREY_COLOR),
+        labelText: "password",
+        labelStyle:
+            TextStyle(fontFamily: 'Raleway', fontSize: 16, color: WHITE_COLOR),
+        focusedBorder: _border(),
+        hasFloatingPlaceholder: true,
+        enabledBorder: _border(),
+      ),
+    );
   }
 
   Widget _loginButton() {
     return Container(
-        width: 320,
-        height: 50,
-        child: RaisedButton(
-          onPressed: () {
-            print("hai");
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          elevation: 10,
-          color: ACCENT_COLOR,
-          child: Text(
-            "LOG IN",
-            style: TextStyle(color: WHITE_COLOR),
-          ),
-        ));
+      width: 320,
+      height: 50,
+      child: StreamBuilder(
+          initialData: "",
+          stream: authBloc.email,
+          builder: (context, snapshot) {
+            return RaisedButton(
+              onPressed: () {
+                print(snapshot.data);
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              elevation: 10,
+              color: ACCENT_COLOR,
+              child: Text(
+                "LOG IN",
+                style: TextStyle(color: WHITE_COLOR),
+              ),
+            );
+          }),
+    );
   }
 }

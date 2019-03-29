@@ -24,3 +24,5 @@ class AuthBloc {
     _passwordController.close();
   }
 }
+
+AuthBloc authBloc =AuthBloc();
