@@ -8,93 +8,72 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final _scaffoldkey = new GlobalKey<ScaffoldState>();
-  VoidCallback _show;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _show = _showBottomsheet;
-  }
-
-  void _showBottomsheet() {
-    setState(() {
-      _show = null;
-    });
-
-    _scaffoldkey.currentState
-        .showBottomSheet((context) {
-          return Container(
-              height: MediaQuery.of(context).size.height / 2,
-              child: ListView(
-                children: <Widget>[
-                  _loginText(),
-                  Container(margin: EdgeInsets.only(top: 30)),
-                  _usernameTextField(),
-                  Container(margin: EdgeInsets.only(top: 10)),
-                  _userpasswordField(),
-                  Container(margin: EdgeInsets.only(top: 10)),
-                  _loginButton()
-                  // RaisedButton(
-                  //   onPressed: () {
-                  //     modal.mainBottomSheet(context);
-                  //   },
-                  // )
-                  //modal.mainBottomSheet(context)
-                ],
-              ));
-        })
-        .closed
-        .whenComplete(() {
-          if (mounted) {
-            setState(() {
-              _show = _showBottomsheet;
-            });
-          }
-        });
-  }
+  bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldkey,
-        backgroundColor: PRIMARY_COLOR,
-        body: _bodyContent(context));
+        backgroundColor: PRIMARY_COLOR, body: _bodyContent(context));
   }
 
   Widget _bodyContent(BuildContext context) {
     return Container(
-        child: ListView(
-      children: <Widget>[
-        Container(margin: EdgeInsets.only(top: 82)),
-        _welcomeText(),
-        Container(margin: EdgeInsets.only(top: 20)),
-        _descpText(),
-        Container(margin: EdgeInsets.only(top: 100)),
-        RaisedButton(
-          onPressed: _show,
-        )
-        // RaisedButton(
-        //   onPressed: () {
-        //     modal.mainBottomSheet(context);
-        //   },
-        // )
-        //modal.mainBottomSheet(context)
-      ],
-    ));
+      child: ListView(
+        children: <Widget>[
+          Container(margin: EdgeInsets.only(top: 60)),
+          _welcomeText(),
+          Container(margin: EdgeInsets.only(top: 20)),
+          _descpText(),
+          Container(margin: EdgeInsets.only(top: 60)),
+          _bottomSheet(),
+        ],
+      ),
+    );
+  }
+
+  Widget _bottomSheet() {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        color: WHITE_COLOR,
+      ),
+      padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
+      height: MediaQuery.of(context).size.height / 1.5,
+      child: ListView(
+        children: <Widget>[
+          Container(margin: EdgeInsets.only(top: 20)),
+          _loginText(),
+          Container(margin: EdgeInsets.only(top: 40)),
+          _usernameTextField(),
+          Container(margin: EdgeInsets.only(top: 10)),
+          _userpasswordField(),
+          Container(margin: EdgeInsets.only(top: 90)),
+          _loginButton()
+        ],
+      ),
+    );
   }
 
   Widget _welcomeText() {
     return Text(
       "Welcome",
-      style: TextStyle(fontFamily: 'Raleway', fontSize: 36, color: WHITE_COLOR),
+      style: TextStyle(
+        fontFamily: 'Raleway',
+        fontSize: 36,
+        color: WHITE_COLOR,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 
   Widget _descpText() {
     return Text(
       "On duty passes made simple.",
+      textAlign: TextAlign.center,
       style: TextStyle(fontSize: 18, color: GREY_COLOR),
     );
   }
@@ -102,21 +81,19 @@ class _AuthScreenState extends State<AuthScreen> {
   Widget _loginText() {
     return Text(
       "Login to your account",
-      style:
-          TextStyle(fontFamily: 'Raleway', fontSize: 24, color: Colors.black),
+      textAlign: TextAlign.center,
+      style: TextStyle(fontFamily: 'Raleway', fontSize: 24, color: Colors.grey),
     );
   }
 
   Widget _usernameTextField() {
     return TextField(
-        style: TextStyle(fontFamily: 'Raleway', color: Colors.black),
+        style: TextStyle(color: Colors.black),
         onChanged: authBloc.onChangeEmail,
         decoration: InputDecoration(
           counterText: "Students enter register number. Teachers enter email.",
-          counterStyle: TextStyle(color: GREY_COLOR),
           labelText: "username",
-          labelStyle: TextStyle(
-              fontFamily: 'Raleway', fontSize: 16, color: Colors.black),
+          labelStyle: TextStyle(fontSize: 16, color: Colors.black),
           focusedBorder: _border(),
           hasFloatingPlaceholder: true,
           enabledBorder: _border(),
@@ -131,15 +108,21 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _userpasswordField() {
     return TextField(
-      obscureText: true,
-      style: TextStyle(fontFamily: 'Raleway', color: Colors.black),
+      obscureText: _obscureText,
+      style: TextStyle(color: Colors.black),
       onChanged: authBloc.onChangePassword,
       decoration: InputDecoration(
         counterText: "Please enter your password. Default is 0000",
-        counterStyle: TextStyle(color: GREY_COLOR),
+        suffixIcon: InkWell(
+          child: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+          onTap: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+        ),
         labelText: "password",
-        labelStyle:
-            TextStyle(fontFamily: 'Raleway', fontSize: 16, color: Colors.black),
+        labelStyle: TextStyle(fontSize: 16, color: Colors.black),
         focusedBorder: _border(),
         hasFloatingPlaceholder: true,
         enabledBorder: _border(),
@@ -166,7 +149,8 @@ class _AuthScreenState extends State<AuthScreen> {
               color: ACCENT_COLOR,
               child: Text(
                 "LOG IN",
-                style: TextStyle(color: WHITE_COLOR),
+                style: TextStyle(
+                    color: WHITE_COLOR, fontSize: 18, letterSpacing: 1.8),
               ),
             );
           }),
