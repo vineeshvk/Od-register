@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:od_register/src/colors/colors.dart';
 import 'package:od_register/src/screens/auth/auth_screen.dart';
 
 class App extends StatelessWidget {
@@ -6,6 +7,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: AuthScreen(),
+      theme: ThemeData(primaryColor: PRIMARY_COLOR),
       builder: (context, child) => ScrollConfiguration(
             behavior: MyBehavior(),
             child: child,

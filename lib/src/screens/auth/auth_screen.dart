@@ -13,7 +13,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.blue, body: _bodyContent(context));
+    return Scaffold(
+        backgroundColor: PRIMARY_COLOR, body: _bodyContent(context));
   }
 
   Widget _bodyContent(BuildContext context) {
@@ -149,7 +150,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               elevation: 10,
-              color: Colors.blue,
+              color: ACCENT_COLOR,
               child: Text(
                 "LOG IN",
                 style: TextStyle(
