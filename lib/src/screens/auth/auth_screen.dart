@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:od_register/src/colors/colors.dart';
 import 'package:od_register/src/screens/bloc/auth_bloc.dart';
+import 'package:od_register/src/screens/student/dashboard.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
@@ -12,8 +13,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: PRIMARY_COLOR, body: _bodyContent(context));
+    return Scaffold(backgroundColor: Colors.blue, body: _bodyContent(context));
   }
 
   Widget _bodyContent(BuildContext context) {
@@ -140,13 +140,16 @@ class _AuthScreenState extends State<AuthScreen> {
           builder: (context, snapshot) {
             return RaisedButton(
               onPressed: () {
-                print(snapshot.data);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => StudentDashboard()),
+                );
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
               elevation: 10,
-              color: ACCENT_COLOR,
+              color: Colors.blue,
               child: Text(
                 "LOG IN",
                 style: TextStyle(
