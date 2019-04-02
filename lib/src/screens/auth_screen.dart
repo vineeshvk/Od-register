@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:od_register/src/colors/colors.dart';
-import 'package:od_register/src/screens/bloc/auth_bloc.dart';
+import 'package:od_register/src/bloc/auth_bloc.dart';
 import 'package:od_register/src/screens/student/dashboard.dart';
 
 class AuthScreen extends StatefulWidget {

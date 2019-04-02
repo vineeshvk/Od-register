@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:od_register/src/colors/colors.dart';
-import 'package:od_register/src/screens/auth/auth_screen.dart';
+import 'package:od_register/src/screens/auth_screen.dart';
 
 class App extends StatelessWidget {
   @override
