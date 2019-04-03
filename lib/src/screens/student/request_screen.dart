@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:od_register/src/colors/colors.dart';
+import 'package:od_register/src/screens/student/new_request.dart';
 
 class RequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(25),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _yourRequestRow(),
-            Container(margin: EdgeInsets.only(top: 10)),
-            _currentActiveText(),
-            Container(margin: EdgeInsets.only(top: 10)),
-            _cardList(),
-            Container(margin: EdgeInsets.only(top: 35)),
-            _previousRequest(),
-            Container(margin: EdgeInsets.only(top: 30)),
-            _approvedRequests(),
-          ],
-        ));
+    return ListView(
+      children: <Widget>[
+        Container(
+            padding: EdgeInsets.all(25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                _yourRequestRow(context),
+                Container(margin: EdgeInsets.only(top: 10)),
+                _currentActiveText(),
+                Container(margin: EdgeInsets.only(top: 10)),
+                _cardList(),
+                Container(margin: EdgeInsets.only(top: 35)),
+                _previousRequest(),
+                Container(margin: EdgeInsets.only(top: 30)),
+                _approvedRequests(),
+                Container(margin: EdgeInsets.only(top: 35)),
+                _approvedRequests(),
+                Container(margin: EdgeInsets.only(top: 35)),
+                _approvedRequests(),
+                Container(margin: EdgeInsets.only(top: 35)),
+                _approvedRequests(),
+              ],
+            ))
+      ],
+    );
   }
 
-  Widget _yourRequestRow() {
+  Widget _yourRequestRow(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -31,7 +42,12 @@ class RequestScreen extends StatelessWidget {
           style: TextStyle(fontFamily: 'Raleway', fontSize: 24),
         ),
         FlatButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => NewRequest()),
+            );
+          },
           child: Row(
             children: <Widget>[
               Icon(Icons.add_circle, color: ACCENT_COLOR),
