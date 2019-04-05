@@ -34,7 +34,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Widget _bottomSheet() {
     return Container(
-      alignment: Alignment.bottomCenter,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(24),
@@ -42,6 +41,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
         color: WHITE_COLOR,
       ),
+      alignment: Alignment.bottomCenter,
       padding: EdgeInsets.fromLTRB(40, 20, 40, 20),
       height: MediaQuery.of(context).size.height / 1.5,
       child: ListView(

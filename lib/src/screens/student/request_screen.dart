@@ -21,11 +21,17 @@ class RequestScreen extends StatelessWidget {
                 _previousRequest(),
                 Container(margin: EdgeInsets.only(top: 30)),
                 _approvedRequests(),
-                Container(margin: EdgeInsets.only(top: 35)),
+                Container(margin: EdgeInsets.only(top: 20)),
+                _divider(),
+                Container(margin: EdgeInsets.only(top: 25)),
                 _approvedRequests(),
-                Container(margin: EdgeInsets.only(top: 35)),
+                Container(margin: EdgeInsets.only(top: 20)),
+                _divider(),
+                Container(margin: EdgeInsets.only(top: 25)),
                 _approvedRequests(),
-                Container(margin: EdgeInsets.only(top: 35)),
+                Container(margin: EdgeInsets.only(top: 20)),
+                _divider(),
+                Container(margin: EdgeInsets.only(top: 25)),
                 _approvedRequests(),
               ],
             ))
@@ -166,28 +172,34 @@ class RequestScreen extends StatelessWidget {
   }
 
   Widget _approvedRequests() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Text(
-              "SNS Texperia",
-              style: TextStyle(fontSize: 16, color: Colors.black),
-            ),
-            Text(
-              "APPROVED",
-              style: TextStyle(fontSize: 12, color: Colors.green),
-            )
-          ],
-        ),
-        Container(margin: EdgeInsets.only(top: 5)),
-        Text(
-          "On 25th March 2019 \nAt SNS College Of Technology",
-          style: TextStyle(fontSize: 14, color: Colors.grey),
-        )
-      ],
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                "SNS Texperia",
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              Text(
+                "APPROVED",
+                style: TextStyle(fontSize: 12, color: Colors.green),
+              )
+            ],
+          ),
+          Container(margin: EdgeInsets.only(top: 5)),
+          Text(
+            "On 25th March 2019 \nAt SNS College Of Technology",
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          )
+        ],
+      ),
     );
+  }
+
+  Widget _divider() {
+    return Divider(height: 5.0, color: Colors.grey);
   }
 }
